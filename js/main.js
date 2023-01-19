@@ -4,7 +4,12 @@ const ctx = canvas.getContext('2d');
 canvas.width = 1024;
 canvas.height = 576;
 
-const player = new Player();
+const parsedCollisions = collisionsLevel1.parse2D();
+
+const collisionBlocks = parsedCollisions.createObjectsFrom2D()
+
+
+const player = new Player({ collisionBlocks });
 const backgroundLevel1 = new Sprite({
     position: {
         x: 0,
@@ -34,6 +39,9 @@ function animate() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     backgroundLevel1.draw();
 
+    collisionBlocks.forEach(collisionBlock => {
+        collisionBlock.draw();
+    });
 
     player.velocity.x = 0;
 
