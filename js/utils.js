@@ -1,3 +1,4 @@
+// Custom array function to parse a large array and convert it to a 16x9 2D array.
 Array.prototype.parse2D = function() {
     const rows = [];
 
@@ -7,6 +8,10 @@ Array.prototype.parse2D = function() {
     return rows;
 }
 
+/*
+ Custom array function to parse a 2D array and create collision objects based on the elements positions.
+ Returns an array containing objects that represent the locations of collisions on the map.
+ */
 Array.prototype.createObjectsFrom2D = function () {
     const objects = [];
     this.forEach((row, yIndex) => {
@@ -24,6 +29,7 @@ Array.prototype.createObjectsFrom2D = function () {
     return objects;
 }
 
+// This function tracks if the player object collides with a door object.
 function doorCollision(door) {
     return (
         player.hitbox.position.x + player.hitbox.width <= door.position.x + door.width &&
@@ -64,6 +70,7 @@ addEventListener('keydown', ({ key }) => {
     }
 });
 
+// Listens for the movement and jump keys to be released.
 addEventListener('keyup', ({ key }) => {
     switch (key) {
         case ' ':
@@ -78,7 +85,10 @@ addEventListener('keyup', ({ key }) => {
     }
 });
 
-
+/**
+ * This function handles the instantiation and population of a player object.
+ * @returns {Player} object containing all initial properties and animations.
+ */
 function createAndPopulatePlayer() {
     return (
         new Player({
@@ -87,13 +97,13 @@ function createAndPopulatePlayer() {
             animations: {
                 idleRight: {
                     frameRate: 11,
-                    frameBuffer: 2,
+                    frameBuffer: 4,
                     loop: true,
                     imageSrc: './img/king/idle.png'
                 },
                 idleLeft: {
                     frameRate: 11,
-                    frameBuffer: 2,
+                    frameBuffer: 4,
                     loop: true,
                     imageSrc: './img/king/idleLeft.png'
 
