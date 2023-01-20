@@ -45,7 +45,7 @@ const player = new Player({
                     onComplete: () => {
                         level++;
 
-                        if (level === 5) level = 1;
+                        if (level === 6) level = 1;
                         levels[level].init();
                         player.switchSprite('idleRight');
                         player.preventInput = false;
@@ -67,7 +67,7 @@ let parsedCollisions;
 let collisionBlocks;
 let doors = [];
 
-let level = 4;
+let level = 1;
 
 let levels = {
     1: {
@@ -207,6 +207,39 @@ let levels = {
         }
     },
 
+    5: {
+        init: () => {
+            parsedCollisions = collisionsLevel5.parse2D();
+            collisionBlocks = parsedCollisions.createObjectsFrom2D();
+            player.collisionBlocks = collisionBlocks;
+            player.position.x = 266;
+            player.position.y = 333;
+
+            if (player.currentAnimation) {
+                player.currentAnimation.isActive = false;
+            }
+            backgroundLevel = new Sprite({
+                position: {
+                    x: 0,
+                    y: 0
+                },
+                imageSrc: './img/backgroundLevel5.png'
+            });
+            doors = [
+                new Sprite({
+                    position: {
+                        x: 654,
+                        y: 274
+                    },
+                    imageSrc: './img/doorOpen.png',
+                    frameRate: 5,
+                    frameBuffer: 8,
+                    loop: false,
+                    autoPlay: false
+                })
+            ];
+        }
+    },
 
 }
 
@@ -239,7 +272,6 @@ function animate() {
     doors.forEach(door => {
         door.draw();
     });
-
 
     player.handleInput(keys);
     player.update();
