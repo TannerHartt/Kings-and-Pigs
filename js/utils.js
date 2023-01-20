@@ -24,8 +24,18 @@ Array.prototype.createObjectsFrom2D = function () {
     return objects;
 }
 
+function doorCollision(door) {
+    return (
+        player.hitbox.position.x + player.hitbox.width <= door.position.x + door.width &&
+        player.hitbox.position.x >= door.position.x &&
+        player.hitbox.position.y + player.hitbox.height >= door.position.y &&
+        player.hitbox.position.y <= door.position.y + door.height
+    )
+}
+
 
 addEventListener('keydown', ({ key }) => {
+    if (player.preventInput) return;
     switch (key) {
         case ' ':
             keys.space.pressed = true;
@@ -36,6 +46,20 @@ addEventListener('keydown', ({ key }) => {
             break;
         case 'd':
             keys.d.pressed = true;
+            break;
+        case 'w':
+            for (let i = 0; i < doors.length; i++) {
+                const door = doors[i];
+
+                if (doorCollision(door)) {
+                    player.velocity.y = 0;
+                    player.velocity.x = 0;
+                    player.preventInput = true;
+                    player.switchSprite('enterDoor');
+                    door.play();
+                    return;
+                }
+            }
             break;
     }
 });
