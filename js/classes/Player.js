@@ -17,13 +17,12 @@ class Player extends Sprite {
 
     update() {
         this.draw();
+        this.position.x += this.velocity.x; // Horizontal movement
 
-        this.position.x += this.velocity.x;
-
-        this.updateHitBox();
+        this.updateHitBox(); // Adjust hit-box to player size instead of base image frame size.
         this.checkForHorizontalCollisions();
-        this.applyGravity();
-        this.updateHitBox();
+        this.applyGravity(); // Apply gravity before checking vertical collisions
+        this.updateHitBox(); // Adjust hit-box to player size instead of base image frame size.
         this.checkForVerticalCollisions();
 
     }
