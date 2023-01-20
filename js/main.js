@@ -29,26 +29,38 @@ const player = new Player({
         },
         runRight: {
             frameRate: 8,
-            frameBuffer: 2,
+            frameBuffer: 4,
             loop: true,
             imageSrc: './img/king/runRight.png'
         },
         runLeft: {
             frameRate: 8,
-            frameBuffer: 2,
+            frameBuffer: 4,
             loop: true,
-            imageSrc: './img/king/idleLeft.png'
+            imageSrc: './img/king/runLeft.png'
         }
-
     }
 });
+
+const doors = [
+    new Sprite({
+        position: {
+            x: 757,
+            y: 273
+        },
+        imageSrc: './img/doorOpen.png',
+        frameRate: 5,
+        frameBuffer: 8,
+        loop: false,
+        autoPlay: false
+    })
+]
 const backgroundLevel1 = new Sprite({
     position: {
         x: 0,
         y: 0
     },
     imageSrc: './img/backgroundLevel1.png'
-
 });
 let keys = {
     space: {
@@ -75,11 +87,28 @@ function animate() {
         collisionBlock.draw();
     });
 
+    doors.forEach(door => {
+        door.draw();
+    });
+
     player.velocity.x = 0;
 
-    if (keys.d.pressed) player.velocity.x = 5;
-    else if (keys.a.pressed) player.velocity.x = -5;
-    else player.velocity.x = 0;
+    if (keys.d.pressed) {
+        player.switchSprite('runRight');
+        player.velocity.x = 5;
+        player.lastDirection = 'right';
+    }
+    else if (keys.a.pressed) {
+        player.switchSprite('runLeft');
+        player.velocity.x = -5;
+        player.lastDirection = 'left';
+    }
+    else {
+        if (player.lastDirection === 'left') player.switchSprite('idleLeft');
+        else player.switchSprite('idleRight');
+
+        player.velocity.x = 0;
+    }
 
     player.update();
 
