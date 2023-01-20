@@ -45,7 +45,7 @@ const player = new Player({
                     onComplete: () => {
                         level++;
 
-                        if (level === 4) level = 1;
+                        if (level === 5) level = 1;
                         levels[level].init();
                         player.switchSprite('idleRight');
                         player.preventInput = false;
@@ -67,14 +67,16 @@ let parsedCollisions;
 let collisionBlocks;
 let doors = [];
 
+let level = 4;
 
-let level = 1;
 let levels = {
     1: {
         init: () => {
             parsedCollisions = collisionsLevel1.parse2D();
             collisionBlocks = parsedCollisions.createObjectsFrom2D();
             player.collisionBlocks = collisionBlocks;
+            player.position.x = 244;
+            player.position.y = 350;
 
             if (player.currentAnimation) {
                 player.currentAnimation.isActive = false;
@@ -169,7 +171,41 @@ let levels = {
                 })
             ];
         }
-    }
+    },
+
+    4: {
+        init: () => {
+            parsedCollisions = collisionsLevel4.parse2D();
+            collisionBlocks = parsedCollisions.createObjectsFrom2D();
+            player.collisionBlocks = collisionBlocks;
+            player.position.x = 760;
+            player.position.y = 313;
+
+            if (player.currentAnimation) {
+                player.currentAnimation.isActive = false;
+            }
+            backgroundLevel = new Sprite({
+                position: {
+                    x: 0,
+                    y: 0
+                },
+                imageSrc: './img/backgroundLevel4.png'
+            });
+            doors = [
+                new Sprite({
+                    position: {
+                        x: 79,
+                        y: 272
+                    },
+                    imageSrc: './img/doorOpen.png',
+                    frameRate: 5,
+                    frameBuffer: 8,
+                    loop: false,
+                    autoPlay: false
+                })
+            ];
+        }
+    },
 
 
 }
