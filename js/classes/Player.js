@@ -1,5 +1,5 @@
 class Player extends Sprite {
-    static collisionBuffer = 0.1;
+    static collisionBuffer = 0.1; // Small buffer between player and collision blocks
     constructor({ collisionBlocks = [], imageSrc, frameRate, animations, loop }) {
         super({ imageSrc, frameRate, animations, loop });
         this.position = {
@@ -27,6 +27,7 @@ class Player extends Sprite {
 
     }
 
+    // Switches the current sprite animation.
     switchSprite(name) {
         if (this.image === this.animations[name].image) return;
 
@@ -38,6 +39,7 @@ class Player extends Sprite {
         this.currentAnimation = this.animations[name];
     }
 
+    // Loop over all collision blocks and track their position relative to the player on the x-axis
     checkForHorizontalCollisions() {
         // check horizontal collisions
         for (let i = 0; i < this.collisionBlocks.length; i++) {
@@ -61,6 +63,7 @@ class Player extends Sprite {
         }
     }
 
+    // Loop over all collision blocks and track their position relative to the player on the y-axis
     checkForVerticalCollisions() {
         // check for vertical collisions
         for (let i = 0; i < this.collisionBlocks.length; i++) {
@@ -86,12 +89,14 @@ class Player extends Sprite {
         }
     }
 
+    // Applies a constant downward velocity to the player
     applyGravity() {
         // Apply gravity
         this.velocity.y += this.gravity;
         this.position.y += this.velocity.y;
     }
 
+    // Check if the player collides with any rectangular object.
     collisionOccurred(collisionObject) {
         return (this.hitbox.position.x <= collisionObject.position.x + collisionObject.width &&
             this.hitbox.position.x + this.hitbox.width >= collisionObject.position.x &&
@@ -100,6 +105,7 @@ class Player extends Sprite {
         )
     }
 
+    // Adjust player hit-box to be size of the player image instead of native image size.
     updateHitBox() {
         this.hitbox = {
             position: {
@@ -111,6 +117,7 @@ class Player extends Sprite {
         }
     }
 
+    // Handles which sprite animation to apply at each frame.
     handleInput(keys) {
         if (this.preventInput) return;
 

@@ -26,17 +26,17 @@ class Sprite {
         this.autoPlay = autoPlay;
         this.currentAnimation = undefined;
 
-        if (this.animations) {
-            for (let key in this.animations) {
-                const image = new Image();
-                image.src = this.animations[key].imageSrc;
-                this.animations[key].image = image;
+        if (this.animations) { // If the object has animations (Player and pig)
+            for (let key in this.animations) { // Loop through each of them
+                const image = new Image(); // Create an image object
+                image.src = this.animations[key].imageSrc; // Set its source property to the src defined for the specified animation.
+                this.animations[key].image = image; // Setting the image element to the newly created image object
             }
         }
     }
 
     draw() {
-        if (!this.loaded) return;
+        if (!this.loaded) return; // If the image hasn't loaded yet, don't compute.
         const cropBox = {
             position: {
                 x: this.width * this.currentFrame,
@@ -75,7 +75,7 @@ class Sprite {
 
         if (this.currentAnimation?.onComplete) {
             if (this.currentFrame === this.frameRate - 1 && !this.currentAnimation.isActive) {
-                this.currentAnimation.onComplete()
+                this.currentAnimation.onComplete();
                 this.currentAnimation.isActive = true;
             }
         }
