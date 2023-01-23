@@ -44,8 +44,8 @@ let levels = {
             parsedCollisions = collisionsLevel2.parse2D();
             collisionBlocks = parsedCollisions.createObjectsFrom2D();
             player.collisionBlocks = collisionBlocks;
-            player.position.x = 96;
-            player.position.y = 140;
+            player.position.x = 96; // Starting x position
+            player.position.y = 140; // Start y position
 
             if (player.currentAnimation) {
                 player.currentAnimation.isActive = false;
@@ -79,8 +79,8 @@ let levels = {
             parsedCollisions = collisionsLevel3.parse2D();
             collisionBlocks = parsedCollisions.createObjectsFrom2D();
             player.collisionBlocks = collisionBlocks;
-            player.position.x = 734;
-            player.position.y = 209;
+            player.position.x = 734; // Starting x position
+            player.position.y = 209; // Start y position
 
             if (player.currentAnimation) {
                 player.currentAnimation.isActive = false;
@@ -113,8 +113,8 @@ let levels = {
             parsedCollisions = collisionsLevel4.parse2D();
             collisionBlocks = parsedCollisions.createObjectsFrom2D();
             player.collisionBlocks = collisionBlocks;
-            player.position.x = 760;
-            player.position.y = 313;
+            player.position.x = 760; // Starting x position
+            player.position.y = 313; // Start y position
 
             if (player.currentAnimation) {
                 player.currentAnimation.isActive = false;
@@ -147,8 +147,8 @@ let levels = {
             parsedCollisions = collisionsLevel5.parse2D();
             collisionBlocks = parsedCollisions.createObjectsFrom2D();
             player.collisionBlocks = collisionBlocks;
-            player.position.x = 266;
-            player.position.y = 333;
+            player.position.x = 266; // Start x position
+            player.position.y = 333; // Start y position
 
             if (player.currentAnimation) {
                 player.currentAnimation.isActive = false;

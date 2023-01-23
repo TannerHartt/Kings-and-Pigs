@@ -45,5 +45,5 @@ function animate() {
 
 }
 
-levels[level].init();
+levels[level].init(); // Begin computation at level 1.
 animate();
